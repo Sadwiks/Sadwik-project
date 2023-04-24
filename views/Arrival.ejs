@@ -31,57 +31,55 @@
 
 
 			<span class="contact1-form-title">
-				Bus Service List
+				Arrival Time for Selected Station
 			</span>
 
 			<div class="wrap-input1 validate-input" data-validate="Name is required">
 				<table>
+					
 					<th>
-						Bus Id
+						Vehicle Id
 					</th>
 					<th>
-						Name
+						Station Name
 					</th>
 					<th>
-						Direction
+						Towards
 					</th>
 					<th>
-						Origination Name
+						Destination
 					</th>
+
 					<th>
-						Destination Name
+						Arrival Time
 					</th>
+
 					<% for(let data of response || []){ %>
 
-						<% for(let innerData of data["routeSections"] || []){ %>
-							<tr>
-								<td>
-									<%= data["id"] %>
-								</td>
-								<td>
-									<%= innerData["name"]%>
-								</td>
-								<td>
-									<%= innerData["direction"]%>
-								</td>
-								<td>
-									<%= innerData["originationName"]%>
-								</td>
-								<td>
-									<%= innerData["destinationName"]%>
-								</td>
-							</tr>
-							<%} %>
+						<tr>
+							<td>
+								<%= data["vehicleId"] %>
+							</td>
+							<td>
+								<%= data["stationName"] %>
+							</td>
+							<td>
+								<%= data["towards"] %>
+							</td>
+
+							<td>
+								<%= data["destinationName"]%>
+							</td>
+
+							<td>
+								<%= data["expectedArrival"]%>
+							</td>
 
 
-								<%} %>
-
+						</tr>
+						<%} %>
 				</table>
-
-
 			</div>
-
-
 
 		</div>
 	</div>

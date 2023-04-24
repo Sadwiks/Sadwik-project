@@ -27,7 +27,7 @@ app.post("/bus-services", function (request, response) {
         });
         res.on('end', () => {
             data = JSON.parse(data);
-            response.render('response', { response: data });
+            response.render('BusServices', { response: data });
         })
     }).on('error', err => {
         console.log(err.message);
@@ -35,6 +35,44 @@ app.post("/bus-services", function (request, response) {
    // response.render('response', { response: data });
 
     
+});
+
+app.get("/stop-points", function (request, response) {
+    
+    stopPointUrl =  " https://api.tfl.gov.uk/Line/"+request.query["lineid"]+"/StopPoints"
+    let data = '';
+    https.get(stopPointUrl, res => {
+        
+        res.on('data', chunk => {
+            data += chunk;
+        });
+        res.on('end', () => {
+            data = JSON.parse(data);
+            response.render('Station', { response: data ,"lineid": request.query["lineid"]});
+        })
+    }).on('error', err => {
+        console.log(err.message);
+    })
+
+});
+
+app.get("/arrival-stop-points", function (request, response) {
+    
+    stopPointUrl =  " https://api.tfl.gov.uk/Line/"+request.query["lineid"]+"/Arrivals/"+request.query["stoppoint"]
+    let data = '';
+    https.get(stopPointUrl, res => {
+        
+        res.on('data', chunk => {
+            data += chunk;
+        });
+        res.on('end', () => {
+            data = JSON.parse(data);
+            response.render('Arrival', { response: data });
+        })
+    }).on('error', err => {
+        console.log(err.message);
+    })
+
 });
 
 
